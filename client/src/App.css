@@ -1,42 +1,56 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+@font-face{
+  font-family: Connection;
+  src: url("./assets/connection-font/Connection-arMJ.otf");
+}
+@font-face{
+  font-family: Connection;
+  src: url("./assets/connection-font/ConnectionBold-ER1g.otf");
+  font-weight: bold;
+}
+body{
+  background-color: #519331;
+  font-family: Connection;
+}
+.scoreTitle {
+  display: flex;
+  justify-content: center;
+  color: #0f380f;
+  font-size: 4vw;
+}
+
+.scoreBoard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -450%);
+  border-color: #0f380f;
+  border-style: double;
+  border-width: 8px;
+  max-width: 80vw;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.score {
+  font-size: 3vw;
+  color: #0f380f;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.board {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-color: #0f380f;
+  border-style: double;
+  border-width: 8px;
+  width: 10vw;
+  height: 20vw;
+  /* This is changed from 55vh to 20vw */
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  grid-gap: 1px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.square {
+  background-color: #0f380f;
 }
