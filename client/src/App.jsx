@@ -2,6 +2,7 @@ import './App.css'
 import React, { useContext, useState, useEffect } from 'react';
 import ScoreContext from './context/ScoreContext';
 import emptyBlockImg from './assets/emptyBlock.jpg';
+import filledBlockImg from './assets/block.jpg';
 
 function App() {
   const { score, setScore } = useContext(ScoreContext);
@@ -22,14 +23,31 @@ function App() {
       }
     } return arr;
   }
-
+  
   const emptyBoard = fillBoard(arr);
   const [board, setBoard] = useState(emptyBoard);
 
-  const updateBoard = (newBoard) => {
-    setBoard(newBoard);
-  };
-
+  const changeSquare = (rowIndex, cellIndex, newStatus) => {
+    setBoard(prevBoard => {
+      return prevBoard.map((row, i) => {
+        if (i === rowIndex) {
+          return row.map((cell, j) => {
+            if (j === cellIndex) {
+              return { ...cell, filled: newStatus };
+            } else {
+              return cell;
+            }
+          });
+        } else {
+          return row;
+        }
+      });
+    });
+  }
+  useEffect(() => {
+    // This will only be run once, when the component is first rendered
+    changeSquare(1, 2, true);
+  }, []);
   return (
     <>
       <h1 className="scoreTitle">SCORE</h1>
@@ -39,7 +57,7 @@ function App() {
       <div className="board">
         {board.map((row, rowIndex) =>
           row.map((cell, cellIndex) =>
-            <img key={`${rowIndex}${cellIndex}`} className="square" src={emptyBlockImg} />
+            <img key={`${rowIndex}${cellIndex}`} className="square" src={cell.filled ? filledBlockImg : emptyBlockImg} alt="block" />
           )
         )}
       </div>
@@ -48,5 +66,6 @@ function App() {
 }
 
 export default App
+
 
 
